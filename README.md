@@ -15,8 +15,9 @@ A lightweight, distributed network monitoring system built with Python and FastA
 ## How to Run
 1. Start the server:
    `uvicorn server:app --reload`
-2. Run the monitoring agent:
-   `python3 tester.py`
+2. Run the monitoring agent (it uses 8.8.8.8 by default, or you can specify your own target):
+   `python3 tester.py [TARGET_IP]`
+   *Example:* `python3 tester.py 1.1.1.1`
 3. View the logs:
    `cat history.log`
 
