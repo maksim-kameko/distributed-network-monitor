@@ -4,7 +4,7 @@ import time
 import sys
 
 class NetworkChecker:
-	def __init__(self, target_ip):
+	def __init__(self, target_ip): #test
 		self.target_ip = target_ip
 
 	def get_status(self):
