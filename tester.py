@@ -8,70 +8,12 @@ class NetworkChecker:
 		self.target_ip = target_ip
 
 	def get_status(self):
-		data = requests.get(f"http://127.0.0.1:8000/{self.target_ip}")
-		return data.json()
-
-	def log_results(self, results):
-		now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-		host = results.get("host")
-		if "1 received" in str(results):
-			status = "[ OK ]"
-		else:
-			status = "[ ERROR ]"
-		log_entry = f"[{now}] {host:15} {status}\n"
-
-		with open("history.log", "a") as f:
-			f.write(log_entry)
-
-
-if len(sys.argv) > 1:
-	target_ip = sys.argv[1]
-else:
-	target_ip = "8.8.8.8"
-
-import requests
-from datetime import datetime
-import time
-import sys
-
-class NetworkChecker:
-	def __init__(self, target_ip):
-		self.target_ip = target_ip
-
-	def get_status(self):
-		data = requests.get(f"http://127.0.0.1:8000/{self.target_ip}")
-		return data.json()
-
-	def log_results(self, results):
-		now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-		host = results.get("host")
-		if "1 received" in str(results):
-			status = "[ OK ]"
-		else:
-			status = "[ ERROR ]"
-		log_entry = f"[{now}] {host:15} {status}\n"
-
-		with open("history.log", "a") as f:
-			f.write(log_entry)
-
-
-if len(sys.argv) > 1:
-	target_ip = sys.argv[1]
-else:
-	target_ip = "8.8.8.8"
-
-import requests
-from datetime import datetime
-import time
-import sys
-
-class NetworkChecker:
-	def __init__(self, target_ip):
-		self.target_ip = target_ip
-
-	def get_status(self):
-		data = requests.get(f"http://127.0.0.1:8000/{self.target_ip}")
-		return data.json()
+		try:
+			data = requests.get(f"http://127.0.0.1:8000/{self.target_ip}")
+			data.raise_for_status()
+			return data.json()
+		except requests.exceptions.RequestException as e:
+			return {"host": self.target_ip, "result": f"Connection Error: {e}"}
 
 	def log_results(self, results):
 		now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
