@@ -19,3 +19,10 @@ A lightweight, distributed network monitoring system built with Python and FastA
    `python3 tester.py`
 3. View the logs:
    `cat history.log`
+
+## Docker
+1. Build the image: `docker build -t monitor-server .`
+2. Run the container: `docker run -p 8000:8000 monitor-server`
+
+## Testing
+Run `pytest` to execute the automated test suite.
