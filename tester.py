@@ -8,17 +8,12 @@ class NetworkChecker:
 		self.target_ip = target_ip
 
 	def get_status(self):
-<<<<<<< HEAD
 		try:
 			data = requests.get(f"http://127.0.0.1:8000/{self.target_ip}")
 			data.raise_for_status()
 			return data.json()
 		except requests.exceptions.RequestException as e:
 			return {"host": self.target_ip, "result": f"Connection Error: {e}"}
-=======
-		data = requests.get(f"http://127.0.0.1:8000/{self.target_ip}")
-		return data.json()
->>>>>>> f426444d929d09aef3e7b9f49ccf7da13d3f70b2
 
 	def log_results(self, results):
 		now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
