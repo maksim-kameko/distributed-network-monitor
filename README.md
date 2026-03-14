@@ -87,10 +87,17 @@ pipeline {
             }
         }
 
-        stage('Robot Framework Tests') {
+stage('Robot Framework Tests') {
             steps {
+                sh '''
+                echo "Starting FastAPI server in the background..."
+                python3 -m uvicorn server:app --port 8000 &
+                
+                sleep 3
+                
                 echo "Running Robot Framework automation..."
-                sh 'python3 -m robot network_tests.robot || true' 
+                python3 -m robot network_tests.robot || true
+                '''
             }
             post {
                 always {
@@ -110,6 +117,8 @@ pipeline {
         failure {
             echo "Build Failed!"
         }
+    }
+}
     }
 }
 
