@@ -24,7 +24,7 @@ pipeline {
             }
         }
 
-stage('Robot Framework Tests') {
+        stage('Robot Framework Tests') {
             steps {
                 sh '''
                 echo "Starting FastAPI server in the background..."
@@ -54,7 +54,5 @@ stage('Robot Framework Tests') {
         failure {
             echo "Build Failed!"
         }
-    }
-}
     }
 }
