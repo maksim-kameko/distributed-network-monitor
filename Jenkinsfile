@@ -11,7 +11,11 @@ pipeline {
         stage('Setup Environment') {
             steps {
                 sh '''
-                echo "Installing dependencies..."
+                echo "Installing system dependencies (ping)..."
+                # Aktualizujemy listę pakietów i instalujemy ping bez interakcji (-y)
+                sudo apt-get update && sudo apt-get install -y iputils-ping
+
+                echo "Installing Python dependencies..."
                 python3 -m pip install --upgrade pip --break-system-packages
                 python3 -m pip install fastapi uvicorn requests pytest httpx robotframework robotframework-requests --break-system-packages
                 '''
