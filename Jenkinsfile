@@ -12,8 +12,8 @@ pipeline {
             steps {
                 sh '''
                 echo "Installing system dependencies (ping)..."
-                # Aktualizujemy listę pakietów i instalujemy ping bez interakcji (-y)
-                sudo apt-get update && sudo apt-get install -y iputils-ping
+                # Usuwamy sudo, bo w kontenerze zazwyczaj go nie ma
+                apt-get update && apt-get install -y iputils-ping
 
                 echo "Installing Python dependencies..."
                 python3 -m pip install --upgrade pip --break-system-packages
