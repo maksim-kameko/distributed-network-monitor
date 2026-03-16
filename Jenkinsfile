@@ -11,11 +11,7 @@ pipeline {
         stage('Setup Environment') {
             steps {
                 sh '''
-                echo "Installing system dependencies (ping)..."
-                # Usuwamy sudo, bo w kontenerze zazwyczaj go nie ma
-                apt-get update && apt-get install -y iputils-ping
-
-                echo "Installing Python dependencies..."
+                apt-get update && apt-get install -y iputils-ping python3 python3-pip
                 python3 -m pip install --upgrade pip --break-system-packages
                 python3 -m pip install fastapi uvicorn requests pytest httpx robotframework robotframework-requests --break-system-packages
                 '''
@@ -31,10 +27,14 @@ pipeline {
         stage('Robot Framework Tests') {
             steps {
                 sh '''
-                echo "Starting FastAPI server in the background..."
-                python3 -m uvicorn server:app --port 8000 &
+                echo "Cleaning up old server processes..."
+                pkill -f uvicorn || true
                 
-                sleep 3
+                echo "Starting FastAPI server in the background..."
+                # Uruchomienie z przekierowaniem logów do pliku
+                python3 -m uvicorn server:app --host 0.0.0.0 --port 8000 > server.log 2>&1 &
+                
+                sleep 5
                 
                 echo "Running Robot Framework automation..."
                 python3 -m robot network_tests.robot || true
@@ -50,6 +50,8 @@ pipeline {
 
     post {
         always {
+            echo "Cleaning up before finishing..."
+            sh 'pkill -f uvicorn || true'
             echo "Pipeline execution finished."
         }
         success {
