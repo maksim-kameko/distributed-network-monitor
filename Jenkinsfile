@@ -12,7 +12,6 @@ pipeline {
             steps {
                 sh '''
                 apt-get update && apt-get install -y iputils-ping python3 python3-pip
-                python3 -m pip install --upgrade pip --break-system-packages
                 python3 -m pip install fastapi uvicorn requests pytest httpx robotframework robotframework-requests --break-system-packages
                 '''
             }
