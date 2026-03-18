@@ -45,8 +45,22 @@ pipeline {
                 }
             }
         }
+    
+	stage('Docker Build & Deploy') {
+	    steps {
+		sh '''
+		docker build -t monitor-server .
+                docker rm -f fastapi-monitor || true
+                docker run -d \
+                  --name fastapi-monitor \
+                  -p 8000:8000 \
+                  --env-file .env \
+                  monitor-server
+                '''
+	    }
+	}
     }
-
+	         
     post {
         always {
             echo "Cleaning up before finishing..."
