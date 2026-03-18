@@ -17,14 +17,32 @@ A lightweight, distributed network monitoring system built with **Python**, **Fa
 
 ```mermaid
 graph LR
-    A[Monitoring Agent] -- ICMP Ping --> B((Target Hosts))
-    A -- Status Reports --> C[FastAPI Server]
-    C -- Persistence --> D[Local Logs]
-    C -- Critical Alerts --> E{Telegram Bot}
-    
-    style A fill:#f9f,stroke:#333,stroke-width:2px
-    style C fill:#bbf,stroke:#333,stroke-width:2px
-    style E fill:#dfd,stroke:#333,stroke-width:2px
+    subgraph Agent
+        A[Monitoring Agent] 
+    end
+
+    subgraph Targets
+        B((Target Hosts))
+    end
+
+    subgraph Server
+        C[FastAPI Server]
+        D[Local Logs / DB]
+        E{Telegram Bot}
+    end
+
+    %% Flow
+    A -- "ICMP Ping / Status Check" --> B
+    A -- "Status Reports (JSON)" --> C
+    C -- "Store / Persist Data" --> D
+    C -- "Critical Alerts" --> E
+
+    %% Style with high contrast
+    style A fill:#a569bd,stroke:#333,stroke-width:2px   %% fioletowy
+    style B fill:#f9e79f,stroke:#333,stroke-width:1px   %% żółty
+    style C fill:#5dade2,stroke:#333,stroke-width:2px   %% niebieski
+    style D fill:#aed6f1,stroke:#333,stroke-width:1px   %% jasnoniebieski
+    style E fill:#58d68d,stroke:#333,stroke-width:2px   %% zielony
 ```
 ## ⚙️ Architecture & CI/CD
 
