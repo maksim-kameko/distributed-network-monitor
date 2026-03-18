@@ -1,87 +1,99 @@
-# Distributed Network Health Monitor
+# 🌐 Distributed Network Health Monitor
 
-A lightweight, distributed network monitoring system built with Python and FastAPI. It includes a fully automated CI/CD pipeline for continuous testing.
+A lightweight, distributed network monitoring system built with **Python**, **FastAPI**, and **Docker**. Features a multi-process architecture with real-time **Telegram notifications** and a fully automated **CI/CD pipeline**.
 
-## Architecture
-- **Server (Backend)**: Uses FastAPI and `subprocess` to execute system-level ping commands.
-- **Tester (Agent)**: An OOP-based client that polls the server for status and logs results with timestamps.
+## 🚀 Key Features
+- **Real-time Monitoring**: OOP-based agent performing active network checks via ICMP.
+- **Dual-Process Container**: Custom entrypoint to run both the FastAPI server and the monitoring agent simultaneously in a single container.
+- **Instant Alerts**: Telegram Bot integration for immediate status reports and failure alerts.
+- **Interactive API**: Fully documented with Swagger UI for remote target management and manual ping execution.
+- **Enterprise CI/CD**: Automated testing and deployment orchestrated by Jenkins on AWS.
 
-## Tech Stack
-- **Language**: Python 3.10+
-- **Framework**: FastAPI
-- **Libraries**: Requests, Subprocess, Datetime, Time
+## 🏗 Tech Stack
+- **Language**: Python 3.10
+- **Framework**: FastAPI, Uvicorn
+- **DevOps**: Docker, Jenkins (Groovy Declarative Pipelines), AWS EC2
 - **Testing**: Pytest (Unit/Integration), Robot Framework (Acceptance/BDD)
-- **Infrastructure**: AWS (EC2), Docker, Jenkins (Continuous Integration), Cloudflare Tunnels
+- **Networking**: Cloudflare Tunnels (Secure Exposure), ICMP/Ping
+- **Messaging**: Telegram Bot API
 
 ---
 
-## CI/CD Pipeline (Live Infrastructure)
+## ⚙️ Architecture & CI/CD
 
-This project is continuously integrated and tested using my own Jenkins CI server.  
-**The server is hosted on an AWS EC2 instance, running 24/7 inside a Docker container, and is exposed securely via Cloudflare Tunnels.**
+The system is designed for high availability and continuous delivery. Every commit to `main` triggers a full validation suite.
 
-🟢 **Live Jenkins Server:**  
-https://jenkins.maksim-network.me
+### Live Infrastructure
+- **Jenkins Server**: https://jenkins.maksim-network.me
+- **Deployment**: Hosted on an **AWS EC2** instance, running within an isolated Docker environment.
 
-The pipeline is written in **Groovy (Declarative Pipeline)** and triggers on every commit to `main`.
-
-**Pipeline Stages:**
-- Checkout
-- Environment Setup
-- Unit Testing (pytest)
-- Acceptance Testing (Robot Framework)
-- Artifacts (HTML/XML reports)
+### Pipeline Stages
+1. `Checkout`  
+2. `Environment Setup`  
+3. `Unit Tests (Pytest)`  
+4. `Acceptance Tests (Robot)`  
+5. `Docker Build & Deploy`
 
 ---
 
-## How to Run
+## 🚦 Getting Started
 
-### 1. Start the server:
-```bash
-uvicorn server:app --reload
-```
+### 1. Environment Configuration
+Create a `.env` file in the root directory:
 
-### 2. Run the monitoring agent:
-(It uses `8.8.8.8` by default, or you can specify your own target)
-
-```bash
-python3 tester.py [TARGET_IP]
-```
-
-Example:
-```bash
-python3 tester.py 1.1.1.1
-```
-
-### 3. View the logs:
-```bash
-cat history.log
+```env
+TELEGRAM_TOKEN=your_bot_token_here
+TELEGRAM_CHAT_ID=your_chat_id_here
 ```
 
 ---
 
-## Docker Deployment
+### 2. Run with Docker (Recommended)
 
-### 1. Build the image:
+The Docker image starts both the API and the monitoring agent:
+
 ```bash
+# Build the image
 docker build -t monitor-server .
-```
 
-### 2. Run the container:
-```bash
-docker run -p 8000:8000 monitor-server
+# Run the container
+docker run -d \
+  --name fastapi-monitor \
+  -p 8000:8000 \
+  --env-file .env \
+  monitor-server
 ```
 
 ---
 
-## Manual Testing
+### 3. Manual Usage (Local Development)
 
-### Unit Tests:
+Run services separately:
+
+```bash
+# Start FastAPI Server
+uvicorn server:app --host 0.0.0.0 --port 8000
+
+# Start Monitoring Agent
+python3 tester.py
+```
+
+---
+
+## 🧪 Testing & Documentation
+
+- **Swagger UI**: http://your-ip:8000/docs  
+- **Unit/Integration Tests**:
 ```bash
 python3 -m pytest test_server.py -v
 ```
 
-### Acceptance Tests:
+- **Acceptance Tests (BDD)**:
 ```bash
 python3 -m robot network_tests.robot
+```
+
+- **Real-time Logs**:
+```bash
+docker logs -f fastapi-monitor
 ```
