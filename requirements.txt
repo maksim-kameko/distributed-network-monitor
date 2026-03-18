@@ -3,5 +3,6 @@ uvicorn
 requests
 pytest
 httpx
+python-dotenv
 robotframework
 robotframework-requests
