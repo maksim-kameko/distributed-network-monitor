@@ -1,5 +1,9 @@
 # 🌐 Distributed Network Health Monitor
 
+![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
+![Docker](https://img.shields.io/badge/docker-ready-blue)
+![Python](https://img.shields.io/badge/python-3.10-yellow)
+
 A lightweight, distributed network monitoring system built with **Python**, **FastAPI**, and **Docker**. Features a multi-process architecture with real-time **Telegram notifications** and a fully automated **CI/CD pipeline**.
 
 ## 🚀 Key Features
