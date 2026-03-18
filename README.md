@@ -25,14 +25,6 @@ graph LR
     style A fill:#f9f,stroke:#333,stroke-width:2px
     style C fill:#bbf,stroke:#333,stroke-width:2px
     style E fill:#dfd,stroke:#333,stroke-width:2px
-    
-## 🏗 Tech Stack
-- **Language**: Python 3.10
-- **Framework**: FastAPI, Uvicorn
-- **DevOps**: Docker, Jenkins (Groovy Declarative Pipelines), AWS EC2
-- **Testing**: Pytest (Unit/Integration), Robot Framework (Acceptance/BDD)
-- **Networking**: Cloudflare Tunnels (Secure Exposure), ICMP/Ping
-- **Messaging**: Telegram Bot API
 ```
 ## ⚙️ Architecture & CI/CD
 
