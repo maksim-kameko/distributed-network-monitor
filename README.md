@@ -37,12 +37,12 @@ graph LR
     C -- "Store / Persist Data" --> D
     C -- "Critical Alerts" --> E
 
-    %% Style with high contrast
-    style A fill:#a569bd,stroke:#333,stroke-width:2px
-    style B fill:#f9e79f,stroke:#333,stroke-width:1px
-    style C fill:#5dade2,stroke:#333,stroke-width:2px
-    style D fill:#aed6f1,stroke:#333,stroke-width:1px
-    style E fill:#58d68d,stroke:#333,stroke-width:2px
+    %% Style with WHITE text for dark backgrounds and BLACK for light ones
+    style A fill:#a569bd,stroke:#333,stroke-width:2px,color:#fff
+    style B fill:#f9e79f,stroke:#333,stroke-width:1px,color:#000
+    style C fill:#5dade2,stroke:#333,stroke-width:2px,color:#fff
+    style D fill:#aed6f1,stroke:#333,stroke-width:1px,color:#000
+    style E fill:#58d68d,stroke:#333,stroke-width:2px,color:#fff
 ```
 
 ## ⚙️ Architecture & CI/CD
