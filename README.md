@@ -13,6 +13,17 @@ A lightweight, distributed network monitoring system built with **Python**, **Fa
 - **Interactive API**: Fully documented with Swagger UI for remote target management and manual ping execution.
 - **Enterprise CI/CD**: Automated testing and deployment orchestrated by Jenkins on AWS.
 
+## 🏗 Architecture & Data Flow
+graph LR
+    A[Monitoring Agent] -- ICMP Ping --> B((Target Hosts))
+    A -- Status Reports --> C[FastAPI Server]
+    C -- Persistence --> D[Local Logs]
+    C -- Critical Alerts --> E{Telegram Bot}
+    
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style C fill:#bbf,stroke:#333,stroke-width:2px
+    style E fill:#dfd,stroke:#333,stroke-width:2px
+    
 ## 🏗 Tech Stack
 - **Language**: Python 3.10
 - **Framework**: FastAPI, Uvicorn
