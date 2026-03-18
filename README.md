@@ -13,7 +13,9 @@ A lightweight, distributed network monitoring system built with **Python**, **Fa
 - **Interactive API**: Fully documented with Swagger UI for remote target management and manual ping execution.
 - **Enterprise CI/CD**: Automated testing and deployment orchestrated by Jenkins on AWS.
 
-## 🏗 Architecture & Data Flow
+### 🏗 Architecture & Data Flow
+
+```mermaid
 graph LR
     A[Monitoring Agent] -- ICMP Ping --> B((Target Hosts))
     A -- Status Reports --> C[FastAPI Server]
@@ -31,9 +33,7 @@ graph LR
 - **Testing**: Pytest (Unit/Integration), Robot Framework (Acceptance/BDD)
 - **Networking**: Cloudflare Tunnels (Secure Exposure), ICMP/Ping
 - **Messaging**: Telegram Bot API
-
----
-
+```
 ## ⚙️ Architecture & CI/CD
 
 The system is designed for high availability and continuous delivery. Every commit to `main` triggers a full validation suite.
