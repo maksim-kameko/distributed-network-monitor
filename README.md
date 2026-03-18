@@ -17,15 +17,15 @@ A lightweight, distributed network monitoring system built with **Python**, **Fa
 
 ```mermaid
 graph LR
-    subgraph Monitor ["🔍 Monitoring Service"]
+    subgraph Monitor [" Monitoring Service"]
         A[Ping Agent] 
     end
 
-    subgraph Targets ["🌐 Checked Hosts"]
+    subgraph Targets [" Checked Hosts"]
         B((Google / AWS / Local))
     end
 
-    subgraph Backend ["⚙️ Control Center"]
+    subgraph Backend [" Control Center"]
         C[FastAPI Server]
         D[History Logs]
         E{Telegram Bot}
