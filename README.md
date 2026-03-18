@@ -38,12 +38,13 @@ graph LR
     C -- "Critical Alerts" --> E
 
     %% Style with high contrast
-    style A fill:#a569bd,stroke:#333,stroke-width:2px   %% fioletowy
-    style B fill:#f9e79f,stroke:#333,stroke-width:1px   %% żółty
-    style C fill:#5dade2,stroke:#333,stroke-width:2px   %% niebieski
-    style D fill:#aed6f1,stroke:#333,stroke-width:1px   %% jasnoniebieski
-    style E fill:#58d68d,stroke:#333,stroke-width:2px   %% zielony
+    style A fill:#a569bd,stroke:#333,stroke-width:2px
+    style B fill:#f9e79f,stroke:#333,stroke-width:1px
+    style C fill:#5dade2,stroke:#333,stroke-width:2px
+    style D fill:#aed6f1,stroke:#333,stroke-width:1px
+    style E fill:#58d68d,stroke:#333,stroke-width:2px
 ```
+
 ## ⚙️ Architecture & CI/CD
 
 The system is designed for high availability and continuous delivery. Every commit to `main` triggers a full validation suite.
