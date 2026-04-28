@@ -15,7 +15,7 @@ pipeline {
                         -v $(pwd):/app \
                         -w /app \
                         python:3.10-slim \
-                        sh -c "pip install fastapi uvicorn requests pytest httpx --quiet && pytest test_server.py -v"
+                        sh -c "pip install fastapi uvicorn requests pytest httpx --quiet && pytest /app/test_server.py -v"
                 '''
             }
         }
